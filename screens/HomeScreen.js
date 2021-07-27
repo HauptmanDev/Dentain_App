@@ -90,33 +90,72 @@ const DATA = [
     },
 ]
 
-export const HomeScreen = () => {
+export class HomeScreen extends React.Component {
 
-    const shadowBtn = {
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
-        shadowColor: '#000000',
-        shadowOpacity: 0.7,
-        shadowRadius: 3.5,
-        elevation: 4,
-    };
+    static navigationOptions = {
+        title: 'Пациенты',
+        headerTintColor: '#2A86FF',
+        headerStyle: {
+            elevation: 0.8,
+            shadowOpacity: 0.8,
+        }
+    }
 
-    return (
-        <Container>
-            <SectionList
-                sections={DATA}
-                keyExtractor={(item, index) => index}
-                renderItem={({item}) => <Appointment {...item}/>}
-                renderSectionHeader={({section: {title}}) => <SectionTitle title={title}/>}
-            />
-            <PlusButton style={shadowBtn}>
-                <Ionicons name="add" size={35} color="white"/>
-            </PlusButton>
-        </Container>
-    );
+    render() {
+        const shadowBtn = {
+            shadowOffset: {
+                width: 0,
+                height: 5,
+            },
+            shadowColor: '#000000',
+            shadowOpacity: 0.7,
+            shadowRadius: 3.5,
+            elevation: 4,
+        };
+        const { navigation } = this.props;
+        return (
+            <Container>
+                <SectionList
+                    sections={DATA}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({item}) => <Appointment navigate={navigation.navigate} {...item}/>}
+                    renderSectionHeader={({section: {title}}) => <SectionTitle title={title}/>}
+                />
+                <PlusButton style={shadowBtn}>
+                    <Ionicons name="add" size={35} color="white"/>
+                </PlusButton>
+            </Container>
+        )
+    }
 }
+
+// export const HomeScreen = () => {
+//
+//     const shadowBtn = {
+//         shadowOffset: {
+//             width: 0,
+//             height: 5,
+//         },
+//         shadowColor: '#000000',
+//         shadowOpacity: 0.7,
+//         shadowRadius: 3.5,
+//         elevation: 4,
+//     };
+//
+//     return (
+//         <Container>
+//             <SectionList
+//                 sections={DATA}
+//                 keyExtractor={(item, index) => index}
+//                 renderItem={({item}) => <Appointment {...item}/>}
+//                 renderSectionHeader={({section: {title}}) => <SectionTitle title={title}/>}
+//             />
+//             <PlusButton style={shadowBtn}>
+//                 <Ionicons name="add" size={35} color="white"/>
+//             </PlusButton>
+//         </Container>
+//     );
+// }
 
 const PlusButton = styled.TouchableOpacity`
     position: absolute;
@@ -132,5 +171,4 @@ const PlusButton = styled.TouchableOpacity`
 
 const Container = styled.View`
     flex: 1;
-    margin-top: 30px;
 `;

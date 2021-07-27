@@ -2,18 +2,16 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import styled from 'styled-components/native'
 
-export default function Group({user, diagnosis, active, time}) {
+export default function Group({user, diagnosis, active, time, navigate}) {
     return (
-        <GroupBlock>
-            <GroupItem>
-                <Avatar source={{uri: user.avatar}}/>
-                <View style={{flex: 1}}>
-                    <Fullname>{user.fullname}</Fullname>
-                    <GrayText>{diagnosis}</GrayText>
-                </View>
-                <GroupDate active={active}>{time}</GroupDate>
-            </GroupItem>
-        </GroupBlock>
+        <GroupItem onPress={navigate.bind(this, "Patient")}>
+            <Avatar source={{uri: user.avatar}}/>
+            <View style={{flex: 1}}>
+                <Fullname>{user.fullname}</Fullname>
+                <GrayText>{diagnosis}</GrayText>
+            </View>
+            <GroupDate active={active}>{time}</GroupDate>
+        </GroupItem>
     );
 }
 
@@ -31,11 +29,10 @@ const GroupDate = styled.Text`
       height: 32px;
       width: 70px;
       text-align: center;
-      line-height: 32px;
+      line-height: 31px;
 `;
 
 const GrayText = styled.Text`
-    font-style: normal;
     font-size: 16px;
     color: #8b979f;
 `;
@@ -53,14 +50,9 @@ const Avatar = styled.Image`
 `;
 
 const GroupItem = styled.TouchableOpacity`
-    padding: 20px 0;
+    padding: 20px;
     flex-direction: row;
     align-items: center;
     border-bottom-width: 1px;
     border-bottom-color: #F3F3F3;
-`;
-
-const GroupBlock = styled.View`
-    padding: 0 20px;
-    margin-bottom: 25px;
 `;
