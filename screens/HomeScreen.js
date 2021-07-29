@@ -90,72 +90,42 @@ const DATA = [
     },
 ]
 
-export class HomeScreen extends React.Component {
+export const HomeScreen = (props) => {
+    const {navigation} = props;
+    const shadowBtn = {
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowColor: '#000000',
+        shadowOpacity: 0.7,
+        shadowRadius: 3.5,
+        elevation: 4,
+    };
 
-    static navigationOptions = {
-        title: 'Пациенты',
-        headerTintColor: '#2A86FF',
-        headerStyle: {
-            elevation: 0.8,
-            shadowOpacity: 0.8,
-        }
-    }
-
-    render() {
-        const shadowBtn = {
-            shadowOffset: {
-                width: 0,
-                height: 5,
-            },
-            shadowColor: '#000000',
-            shadowOpacity: 0.7,
-            shadowRadius: 3.5,
-            elevation: 4,
-        };
-        const { navigation } = this.props;
-        return (
-            <Container>
-                <SectionList
-                    sections={DATA}
-                    keyExtractor={(item, index) => index}
-                    renderItem={({item}) => <Appointment navigate={navigation.navigate} {...item}/>}
-                    renderSectionHeader={({section: {title}}) => <SectionTitle title={title}/>}
-                />
-                <PlusButton style={shadowBtn}>
-                    <Ionicons name="add" size={35} color="white"/>
-                </PlusButton>
-            </Container>
-        )
-    }
+    return (
+<Container>
+    <SectionList
+        sections={DATA}
+        keyExtractor={(item, index) => index}
+        renderItem={({item}) => <Appointment navigate={navigation.navigate} {...item}/>}
+        renderSectionHeader={({section: {title}}) => <SectionTitle title={title}/>}
+    />
+    <PlusButton style={shadowBtn}>
+        <Ionicons name="add" size={35} color="white"/>
+    </PlusButton>
+</Container>
+    );
 }
 
-// export const HomeScreen = () => {
-//
-//     const shadowBtn = {
-//         shadowOffset: {
-//             width: 0,
-//             height: 5,
-//         },
-//         shadowColor: '#000000',
-//         shadowOpacity: 0.7,
-//         shadowRadius: 3.5,
-//         elevation: 4,
-//     };
-//
-//     return (
-//         <Container>
-//             <SectionList
-//                 sections={DATA}
-//                 keyExtractor={(item, index) => index}
-//                 renderItem={({item}) => <Appointment {...item}/>}
-//                 renderSectionHeader={({section: {title}}) => <SectionTitle title={title}/>}
-//             />
-//             <PlusButton style={shadowBtn}>
-//                 <Ionicons name="add" size={35} color="white"/>
-//             </PlusButton>
-//         </Container>
-//     );
-// }
+HomeScreen.navigationOptions = {
+    title: 'Пациенты',
+    headerTintColor: '#2A86FF',
+    headerStyle: {
+        elevation: 0.8,
+        shadowOpacity: 0.8,
+    }
+}
 
 const PlusButton = styled.TouchableOpacity`
     position: absolute;
